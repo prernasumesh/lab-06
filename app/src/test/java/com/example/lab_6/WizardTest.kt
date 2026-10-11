@@ -4,7 +4,7 @@ import junit.framework.TestCase.assertEquals
 import org.junit.Before
 import org.junit.Test
 
-class WizardTest{
+class WizardTest {
     private lateinit var evilWizard: Wizard
 
     // Set up a new wizard before every single test
@@ -26,5 +26,20 @@ class WizardTest{
         val damageDealt = evilWizard.castSpell("Explosion")
         assertEquals(0, damageDealt)
         assertEquals(5, evilWizard.mana) // mana still is 5
+    }
+
+    @Test
+    fun castSpell_frostbite_successful() {
+        val damageDealt = evilWizard.castSpell("Frostbite")
+        assertEquals(20, damageDealt)
+        assertEquals(25, evilWizard.mana)
+    }
+
+    @Test
+    fun castSpell_frostbite_unsuccessful() {
+        evilWizard.mana = 4
+        val damageDealt = evilWizard.castSpell("Frostbite")
+        assertEquals(0, damageDealt)
+        assertEquals(4, evilWizard.mana)
     }
 }
